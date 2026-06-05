@@ -19,7 +19,7 @@
   },
   {
     "name": "【PSA10】リーリエ",
-    "price": 2350000,
+    "price": 2300000,
     "img": "https://climaxcard.github.io/climax5/gazou/360.png",
     "k": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "name": "【PSA10】アセロラ",
-    "price": 1480000,
+    "price": 1440000,
     "img": "https://climaxcard.github.io/climax5/gazou/362.png",
     "k": 8
   },
   {
     "name": "【PSA10】オカルトマニア(SR仕様)",
-    "price": 621000,
+    "price": 651000,
     "img": "https://climaxcard.github.io/climax5/gazou/363.png",
     "k": 9
   },
@@ -127,7 +127,7 @@
   },
   {
     "name": "【PSA10】エリカのおもてなし",
-    "price": 174000,
+    "price": 173000,
     "img": "https://climaxcard.github.io/climax5/gazou/220.png",
     "k": 22
   },
@@ -139,13 +139,13 @@
   },
   {
     "name": "【PSA10】マリィ",
-    "price": 96000,
+    "price": 93000,
     "img": "https://climaxcard.github.io/climax5/gazou/374.png",
     "k": 24
   },
   {
     "name": "【PSA10】メイ",
-    "price": 77500,
+    "price": 78500,
     "img": "https://climaxcard.github.io/climax5/gazou/288.png",
     "k": 25
   },
@@ -169,7 +169,7 @@
   },
   {
     "name": "【PSA10】エリカのおもてなし",
-    "price": 45500,
+    "price": 43500,
     "img": "https://climaxcard.github.io/climax5/gazou/267.png",
     "k": 29
   },
@@ -181,7 +181,7 @@
   },
   {
     "name": "【PSA10】マリィのプライド",
-    "price": 30000,
+    "price": 31000,
     "img": "https://climaxcard.github.io/climax5/gazou/381.png",
     "k": 31
   },
@@ -199,7 +199,7 @@
   },
   {
     "name": "【PSA10】ナンジャモ",
-    "price": 85500,
+    "price": 83500,
     "img": "https://climaxcard.github.io/climax5/gazou/222.png",
     "k": 34
   },
@@ -211,7 +211,7 @@
   },
   {
     "name": "【PSA10】ナンジャモ",
-    "price": 16000,
+    "price": 15000,
     "img": "https://climaxcard.github.io/climax5/gazou/385.png",
     "k": 36
   },
@@ -229,7 +229,7 @@
   },
   {
     "name": "【PSA10】ゼイユ",
-    "price": 66500,
+    "price": 67000,
     "img": "https://climaxcard.github.io/climax5/gazou/299.png",
     "k": 39
   },
@@ -241,7 +241,7 @@
   },
   {
     "name": "【PSA10】アセロラの予感",
-    "price": 15000,
+    "price": 16000,
     "img": "https://climaxcard.github.io/climax5/gazou/389.png",
     "k": 41
   },
@@ -259,7 +259,7 @@
   },
   {
     "name": "【PSA10】カイ",
-    "price": 13500,
+    "price": 13000,
     "img": "https://climaxcard.github.io/climax5/gazou/392.png",
     "k": 44
   },
@@ -289,19 +289,19 @@
   },
   {
     "name": "【PSA10】ピカチュウ(ムンク)",
-    "price": 2100000,
+    "price": 2150000,
     "img": "https://climaxcard.github.io/climax5/gazou/283.png",
     "k": 49
   },
   {
     "name": "【PSA10】ミミッキュ(ムンク)",
-    "price": 2700000,
+    "price": 2650000,
     "img": "https://climaxcard.github.io/climax5/gazou/397.png",
     "k": 50
   },
   {
     "name": "【PSA10】イーブイ(ムンク)",
-    "price": 739000,
+    "price": 706000,
     "img": "https://climaxcard.github.io/climax5/gazou/398.png",
     "k": 51
   },
@@ -343,13 +343,13 @@
   },
   {
     "name": "【PSA10】ポンチョを着たピカチュウ",
-    "price": 2350000,
+    "price": 2400000,
     "img": "https://climaxcard.github.io/climax5/gazou/278.png",
     "k": 58
   },
   {
     "name": "【PSA10】ポンチョを着たピカチュウ",
-    "price": 2050000,
+    "price": 2100000,
     "img": "https://climaxcard.github.io/climax5/gazou/279.png",
     "k": 59
   },
@@ -373,19 +373,19 @@
   },
   {
     "name": "【PSA10】リザードンVMAX(HR仕様)",
-    "price": 1700000,
+    "price": 1750000,
     "img": "https://climaxcard.github.io/climax5/gazou/692.png",
     "k": 63
   },
   {
     "name": "【PSA10】ブースターVMAX",
-    "price": 681000,
+    "price": 663000,
     "img": "https://climaxcard.github.io/climax5/gazou/698.png",
     "k": 64
   },
   {
     "name": "【PSA10】シャワーズVMAX",
-    "price": 980000,
+    "price": 960000,
     "img": "https://climaxcard.github.io/climax5/gazou/696.png",
     "k": 65
   },
@@ -397,7 +397,7 @@
   },
   {
     "name": "【PSA10】ブラッキーVMAX",
-    "price": 840000,
+    "price": 805000,
     "img": "https://climaxcard.github.io/climax5/gazou/700.png",
     "k": 67
   },
@@ -415,13 +415,13 @@
   },
   {
     "name": "【PSA10】リーフィアVMAX",
-    "price": 93000,
+    "price": 89000,
     "img": "https://climaxcard.github.io/climax5/gazou/756.png",
     "k": 70
   },
   {
     "name": "【PSA10】エーフィVMAX(SA)",
-    "price": 86500,
+    "price": 89500,
     "img": "https://climaxcard.github.io/climax5/gazou/240.png",
     "k": 71
   },
@@ -433,7 +433,7 @@
   },
   {
     "name": "【PSA10】ゲンガーVMAX",
-    "price": 400000,
+    "price": 406000,
     "img": "https://climaxcard.github.io/climax5/gazou/720.png",
     "k": 73
   },
@@ -457,13 +457,13 @@
   },
   {
     "name": "【PSA10】れんげきウーラオスVMAX",
-    "price": 98000,
+    "price": 95000,
     "img": "https://climaxcard.github.io/climax5/gazou/755.png",
     "k": 77
   },
   {
     "name": "【PSA10】いちげきウーラオスVMAX",
-    "price": 78000,
+    "price": 75500,
     "img": "https://climaxcard.github.io/climax5/gazou/781.png",
     "k": 78
   },
@@ -475,7 +475,7 @@
   },
   {
     "name": "【PSA10】ブラッキーV(SA)",
-    "price": 98000,
+    "price": 94000,
     "img": "https://climaxcard.github.io/climax5/gazou/224.png",
     "k": 80
   },
@@ -493,7 +493,7 @@
   },
   {
     "name": "【PSA10】シャワーズV(SA)",
-    "price": 37500,
+    "price": 37000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/9pdpcmtbp9b7d86ae2-e3b1-402d-b991-810201bd651a.jpg",
     "k": 83
   },
@@ -529,13 +529,13 @@
   },
   {
     "name": "【PSA10】ルギアV",
-    "price": 214000,
+    "price": 219000,
     "img": "https://climaxcard.github.io/climax5/gazou/743.png",
     "k": 89
   },
   {
     "name": "【PSA10】ラティアス&ラティオスGX",
-    "price": 905000,
+    "price": 925000,
     "img": "https://climaxcard.github.io/climax5/gazou/699.png",
     "k": 90
   },
@@ -589,7 +589,7 @@
   },
   {
     "name": "【PSA10】メガサーナイトex",
-    "price": 152000,
+    "price": 149000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/0biduh8mqpg52f6675c-4d9c-42b4-b7a7-2030ecaed42c.jpg",
     "k": 99
   },
@@ -625,7 +625,7 @@
   },
   {
     "name": "【PSA10】メガリザードンXex",
-    "price": 184000,
+    "price": 190000,
     "img": "https://climaxcard.github.io/climax5/gazou/749.png",
     "k": 105
   },
@@ -649,7 +649,7 @@
   },
   {
     "name": "【PSA10】メガゲンガーex",
-    "price": 110000,
+    "price": 111000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/4hm6onelt8ge9700465-03a5-4de6-98d9-1ab9af60c2c6.webp",
     "k": 109
   },
@@ -667,7 +667,7 @@
   },
   {
     "name": "【PSA10】リザードンex",
-    "price": 89500,
+    "price": 87000,
     "img": "https://climaxcard.github.io/climax5/gazou/247.png",
     "k": 112
   },
@@ -679,13 +679,13 @@
   },
   {
     "name": "【PSA10】ピカチュウex",
-    "price": 100000,
+    "price": 97000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/iuuieecj2ao9b7ee3db-fb8d-4d4f-8c44-645916fd5a8b.webp",
     "k": 114
   },
   {
     "name": "【PSA10】シロナのガブリアスex",
-    "price": 53500,
+    "price": 51500,
     "img": "https://climaxcard.github.io/climax5/gazou/663.png",
     "k": 115
   },
@@ -697,25 +697,25 @@
   },
   {
     "name": "【PSA10】メガカイリューex",
-    "price": 71500,
+    "price": 70000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/chprpf5vcro8f5a9f20-2f4b-4e9e-b445-b0e3ea8b243a.webp",
     "k": 117
   },
   {
     "name": "【PSA10】ロケット団のミュウツーex",
-    "price": 61500,
+    "price": 57000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/qhscjhh5a088c640b85-9464-448f-943c-d128a5920fa0.jpg",
     "k": 118
   },
   {
     "name": "【PSA10】ヒビキのホウオウex",
-    "price": 47000,
+    "price": 47500,
     "img": "https://climaxcard.github.io/climax5/gazou/302.png",
     "k": 119
   },
   {
     "name": "【PSA10】レシラムex",
-    "price": 42000,
+    "price": 40500,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/ji33889fj7b779b63e-7726-4ded-a0f0-cb023792c4f8.jpg",
     "k": 120
   },
@@ -727,7 +727,7 @@
   },
   {
     "name": "【PSA10】ラティアスex",
-    "price": 43000,
+    "price": 43500,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/umodhomj7cgd76431d6-935a-4ebb-9f16-ce80e454222e.webp",
     "k": 122
   },
@@ -739,13 +739,13 @@
   },
   {
     "name": "【PSA10】サーナイトex",
-    "price": 37000,
+    "price": 36500,
     "img": "https://climaxcard.github.io/climax5/gazou/344.png",
     "k": 124
   },
   {
     "name": "【PSA10】サーナイトex",
-    "price": 36500,
+    "price": 37000,
     "img": "https://climaxcard.github.io/climax5/gazou/228.png",
     "k": 125
   },
@@ -757,7 +757,7 @@
   },
   {
     "name": "【PSA10】カメックスex",
-    "price": 45000,
+    "price": 44500,
     "img": "https://climaxcard.github.io/climax5/gazou/301.png",
     "k": 127
   },
@@ -775,7 +775,7 @@
   },
   {
     "name": "【PSA10】Nのゾロアークex",
-    "price": 16500,
+    "price": 16000,
     "img": "https://climaxcard.github.io/climax5/gazou/227.png",
     "k": 130
   },
@@ -793,13 +793,13 @@
   },
   {
     "name": "【PSA10】Nのゾロアークex",
-    "price": 21500,
+    "price": 20500,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/1eakghhun3gab7754cf-40c4-4558-b580-1bd02c88ed47.jpg",
     "k": 133
   },
   {
     "name": "【PSA10】ダイゴのメタグロスex",
-    "price": 14000,
+    "price": 13000,
     "img": "https://static.mycalinks.io/pos/store/32/item/img/nnu100bhq25cc84625-62ea-4765-8521-1c9848aeb7c9.jpg",
     "k": 134
   },

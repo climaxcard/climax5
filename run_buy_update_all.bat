@@ -226,7 +226,7 @@ call :LOG "===== DONE ====="
 echo.
 echo =====================================
 echo 完了 / ログを開きます
-echo ログ: %LOG_FILE%
+echo LOG_FILE=%LOG_FILE%
 echo =====================================
 echo.
 

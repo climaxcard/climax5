@@ -122,11 +122,11 @@ call :RUN "%PYTHON_EXE%" "%BOX_RENDER_SCRIPT%" --html "%BOX_HTML_PATH%" --out "%
 popd >> "%LOG_FILE%" 2>&1
 
 if exist "%BOX_OUT_DIR%\buylist_page_1.png" (
-  copy /y "%BOX_OUT_DIR%\buylist_page_1.png" "%PNG_SAVE_DIR%\pokemon_box_buylist_1.png" >> "%LOG_FILE%" 2>&1
+  copy /y "%BOX_OUT_DIR%\buylist_page_1.png" "%PNG_SAVE_DIR%\ポケカBOX買取表1.png" >> "%LOG_FILE%" 2>&1
 )
 
 if exist "%BOX_OUT_DIR%\buylist_page_2.png" (
-  copy /y "%BOX_OUT_DIR%\buylist_page_2.png" "%PNG_SAVE_DIR%\pokemon_box_buylist_2.png" >> "%LOG_FILE%" 2>&1
+  copy /y "%BOX_OUT_DIR%\buylist_page_2.png" "%PNG_SAVE_DIR%\ポケカBOX買取表2.png" >> "%LOG_FILE%" 2>&1
 )
 
 :AFTER_BOX

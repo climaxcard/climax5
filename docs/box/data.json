@@ -181,7 +181,7 @@
   },
   {
     "name": "ポケモンカード151 BOX",
-    "price": 52200,
+    "price": 51200,
     "img": "https://climaxcard.github.io/climax5/gazou/22.png"
   },
   {
@@ -330,14 +330,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/1.png"
   },
   {
-    "name": "黒炎の支配者 BOX",
-    "price": 18300,
-    "img": "https://climaxcard.github.io/climax5/gazou/21.png"
-  },
-  {
     "name": "摩天パーフェクトBOX",
     "price": 17400,
     "img": "https://climaxcard.github.io/climax5/gazou/46.png"
+  },
+  {
+    "name": "黒炎の支配者 BOX",
+    "price": 17300,
+    "img": "https://climaxcard.github.io/climax5/gazou/21.png"
   },
   {
     "name": "シャイニートレジャーex BOX",
@@ -385,14 +385,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/37.png"
   },
   {
+    "name": "変幻の仮面 BOX",
+    "price": 12300,
+    "img": "https://climaxcard.github.io/climax5/gazou/11.png"
+  },
+  {
     "name": "クリムゾンヘイズ BOX",
     "price": 12200,
     "img": "https://climaxcard.github.io/climax5/gazou/12.png"
-  },
-  {
-    "name": "変幻の仮面 BOX",
-    "price": 12100,
-    "img": "https://climaxcard.github.io/climax5/gazou/11.png"
   },
   {
     "name": "スカーレットEX BOX",
@@ -400,14 +400,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/27.png"
   },
   {
-    "name": "レイジングサーフ BOX",
-    "price": 12000,
-    "img": "https://climaxcard.github.io/climax5/gazou/19.png"
+    "name": "ワイルドフォース BOX",
+    "price": 11700,
+    "img": "https://climaxcard.github.io/climax5/gazou/14.png"
   },
   {
-    "name": "ワイルドフォース BOX",
-    "price": 12000,
-    "img": "https://climaxcard.github.io/climax5/gazou/14.png"
+    "name": "レイジングサーフ BOX",
+    "price": 11500,
+    "img": "https://climaxcard.github.io/climax5/gazou/19.png"
   },
   {
     "name": "クレイバーストBOX",

@@ -175,14 +175,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/58.png"
   },
   {
-    "name": "ポケモンカード151 BOX",
-    "price": 52500,
-    "img": "https://climaxcard.github.io/climax5/gazou/22.png"
-  },
-  {
     "name": "連撃マスターBOX",
     "price": 52500,
     "img": "https://climaxcard.github.io/climax5/gazou/52.png"
+  },
+  {
+    "name": "ポケモンカード151 BOX",
+    "price": 52200,
+    "img": "https://climaxcard.github.io/climax5/gazou/22.png"
   },
   {
     "name": "「ソード」BOX",
@@ -310,9 +310,9 @@
     "img": "https://climaxcard.github.io/climax5/gazou/6.png"
   },
   {
-    "name": "インフェルノX BOX",
-    "price": 18900,
-    "img": "https://climaxcard.github.io/climax5/gazou/199.png"
+    "name": "熱風のアリーナ BOX",
+    "price": 19000,
+    "img": "https://climaxcard.github.io/climax5/gazou/4.png"
   },
   {
     "name": "シャイニースターV BOX",
@@ -320,9 +320,9 @@
     "img": "https://climaxcard.github.io/climax5/gazou/55.png"
   },
   {
-    "name": "熱風のアリーナ BOX",
-    "price": 18700,
-    "img": "https://climaxcard.github.io/climax5/gazou/4.png"
+    "name": "インフェルノX BOX",
+    "price": 18500,
+    "img": "https://climaxcard.github.io/climax5/gazou/199.png"
   },
   {
     "name": "ホワイトフレア BOX",
@@ -331,13 +331,8 @@
   },
   {
     "name": "黒炎の支配者 BOX",
-    "price": 18200,
+    "price": 18300,
     "img": "https://climaxcard.github.io/climax5/gazou/21.png"
-  },
-  {
-    "name": "トリプレットビートBOX",
-    "price": 17600,
-    "img": "https://climaxcard.github.io/climax5/gazou/25.png"
   },
   {
     "name": "摩天パーフェクトBOX",
@@ -346,7 +341,7 @@
   },
   {
     "name": "シャイニートレジャーex BOX",
-    "price": 16900,
+    "price": 16700,
     "img": "https://climaxcard.github.io/climax5/gazou/15.png"
   },
   {
@@ -355,8 +350,13 @@
     "img": "https://climaxcard.github.io/climax5/gazou/200.png"
   },
   {
+    "name": "トリプレットビートBOX",
+    "price": 16300,
+    "img": "https://climaxcard.github.io/climax5/gazou/25.png"
+  },
+  {
     "name": "楽園ドラゴーナ BOX",
-    "price": 16000,
+    "price": 15900,
     "img": "https://climaxcard.github.io/climax5/gazou/8.png"
   },
   {
@@ -386,7 +386,7 @@
   },
   {
     "name": "クリムゾンヘイズ BOX",
-    "price": 12300,
+    "price": 12200,
     "img": "https://climaxcard.github.io/climax5/gazou/12.png"
   },
   {
@@ -410,9 +410,9 @@
     "img": "https://climaxcard.github.io/climax5/gazou/14.png"
   },
   {
-    "name": "メガブレイブ BOX",
+    "name": "クレイバーストBOX",
     "price": 11400,
-    "img": "https://climaxcard.github.io/climax5/gazou/197.png"
+    "img": "https://climaxcard.github.io/climax5/gazou/24.png"
   },
   {
     "name": "アビスアイ BOX",
@@ -420,9 +420,9 @@
     "img": "https://static.mycalinks.io/app/item/image/box/M5_b.jpg"
   },
   {
-    "name": "クレイバーストBOX",
-    "price": 10900,
-    "img": "https://climaxcard.github.io/climax5/gazou/24.png"
+    "name": "メガブレイブ BOX",
+    "price": 10600,
+    "img": "https://climaxcard.github.io/climax5/gazou/197.png"
   },
   {
     "name": "スノーハザードBOX",
@@ -445,19 +445,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/18.png"
   },
   {
-    "name": "メガシンフォニア BOX",
-    "price": 10000,
-    "img": "https://climaxcard.github.io/climax5/gazou/196.png"
+    "name": "サイバージャッジ BOX",
+    "price": 9900,
+    "img": "https://climaxcard.github.io/climax5/gazou/13.png"
   },
   {
     "name": "バトルパートナーズ BOX",
-    "price": 9900,
-    "img": "https://climaxcard.github.io/climax5/gazou/5.png"
-  },
-  {
-    "name": "サイバージャッジ BOX",
     "price": 9800,
-    "img": "https://climaxcard.github.io/climax5/gazou/13.png"
+    "img": "https://climaxcard.github.io/climax5/gazou/5.png"
   },
   {
     "name": "未来の一閃 BOX",
@@ -475,13 +470,18 @@
     "img": "https://climaxcard.github.io/climax5/gazou/26.png"
   },
   {
+    "name": "メガシンフォニア BOX",
+    "price": 9500,
+    "img": "https://climaxcard.github.io/climax5/gazou/196.png"
+  },
+  {
     "name": "ニンジャスピナー BOX",
     "price": 9200,
     "img": "https://static.mycalinks.io/app/item/image/box/M4_b.jpg"
   },
   {
     "name": "ムニキスゼロ BOX",
-    "price": 7100,
+    "price": 7400,
     "img": "https://static.mycalinks.io/app/item/image/box/M3_b.jpg"
   }
 ]

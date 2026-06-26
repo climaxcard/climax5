@@ -43,7 +43,6 @@ set "PSA_OUT_DIR=%BOX_TOOLS_DIR%\out_png_psa"
 
 REM PNG保存先も英数字フォルダ
 set "PNG_SAVE_DIR=C:\Users\user\OneDrive\Desktop\pokemon_rush"
-
 REM ==================================================
 REM ログ設定
 REM ==================================================
@@ -177,39 +176,16 @@ REM BOX/PSA生成後に add / commit / push
 REM ==================================================
 call :RUN git status
 
-call :RUN git add "%DOCS_DEFAULT%"
-call :RUN git add "%DOCS_ROOT%\index.html"
-call :RUN git add "%DOCS_PRICE_ASC%"
-call :RUN git add "%DOCS_PRICE_DESC%"
-
-if exist "docs\box\" (
-  call :RUN git add "docs\box"
-) else (
-  call :LOG "[INFO] docs\box skip"
-)
-
-if exist "docs\psa\" (
-  call :RUN git add "docs\psa"
-) else (
-  call :LOG "[INFO] docs\psa skip"
-)
-
-if exist "%GAZOU_DIR%\" (
-  call :RUN git add "%GAZOU_DIR%"
-) else (
-  call :LOG "[INFO] gazou skip"
-)
-
-if exist "%DOCS_GAZOU_DIR%\" (
-  call :RUN git add "%DOCS_GAZOU_DIR%"
-) else (
-  call :LOG "[INFO] docs\gazou skip"
-)
+REM WEB買取表を全部Gitに反映
+call :RUN git add docs
 
 REM bat自体もGit管理している場合は反映
 if exist "run_buy_update_all.bat" (
   call :RUN git add "run_buy_update_all.bat"
 )
+
+REM 画像保存先はGit外なのでgit addしない
+call :LOG "[INFO] PNG_SAVE_DIR is outside git, skip git add"
 
 REM commit は変更なしのとき失敗扱いになるので止めない
 call :LOG "===== git commit (no-fail) ====="
@@ -231,6 +207,8 @@ echo =====================================
 echo.
 
 start "" notepad "%LOG_FILE%"
+echo.
+echo 終了しました。閉じるには何かキーを押してください。
 pause
 endlocal
 exit /b 0

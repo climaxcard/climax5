@@ -42,7 +42,7 @@ set "PSA_HTML_PATH=%PSA_OUT_HTML_DIR%\index.html"
 set "PSA_OUT_DIR=%BOX_TOOLS_DIR%\out_png_psa"
 
 REM PNG保存先も英数字フォルダ
-set "PNG_SAVE_DIR=C:\Users\user\OneDrive\Desktop\pokemon_rush"
+set "PNG_SAVE_DIR=C:\Users\user\OneDrive\Desktop\ポケカラッシュ"
 REM ==================================================
 REM ログ設定
 REM ==================================================
@@ -220,6 +220,18 @@ REM ==================================================
 echo %~1
 echo %~1>> "%LOG_FILE%"
 exit /b 0
+
+:UPDATE_DATE
+"%PYTHON_EXE%" -c "from pathlib import Path; import re, datetime; p=Path(r'%~1'); s=p.read_text(encoding='utf-8'); today=datetime.datetime.now().strftime('%Y/%m/%d'); today_jp=datetime.datetime.now().strftime('%Y年%m月%d日'); s=re.sub(r'\d{4}[/-]\d{1,2}[/-]\d{1,2}', today, s); s=re.sub(r'\d{4}年\d{1,2}月\d{1,2}日', today_jp, s); p.write_text(s,encoding='utf-8')" >> "%LOG_FILE%" 2>&1
+if not "%ERRORLEVEL%"=="0" (
+  call :LOG "[ERROR] 日付更新に失敗: %~1"
+  pause
+  exit /b 1
+)
+call :LOG "[INFO] 日付更新OK: %~1"
+exit /b 0
+
+
 
 :RUN
 echo [RUN] %*>> "%LOG_FILE%"

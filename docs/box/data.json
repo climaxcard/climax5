@@ -36,7 +36,7 @@
   },
   {
     "name": "スペシャルBOX ポケモンセンターカナザワオープン記念",
-    "price": 150000,
+    "price": 140000,
     "img": "https://climaxcard.github.io/climax5/gazou/54.png"
   },
   {
@@ -266,7 +266,7 @@
   },
   {
     "name": "ロケット団の栄光 BOX",
-    "price": 23000,
+    "price": 22500,
     "img": "https://climaxcard.github.io/climax5/gazou/3.png"
   },
   {
@@ -300,24 +300,19 @@
     "img": "https://climaxcard.github.io/climax5/gazou/50.png"
   },
   {
-    "name": "スペシャルBOX ポケモンセンターヒロシマ",
-    "price": 19500,
-    "img": "https://climaxcard.github.io/climax5/gazou/198.png"
-  },
-  {
     "name": "シャイニースターV BOX",
     "price": 18800,
     "img": "https://climaxcard.github.io/climax5/gazou/55.png"
   },
   {
     "name": "ハイクラスパック テラスタルフェスex BOX",
-    "price": 18700,
+    "price": 18600,
     "img": "https://climaxcard.github.io/climax5/gazou/6.png"
   },
   {
-    "name": "インフェルノX BOX",
+    "name": "スペシャルBOX ポケモンセンターヒロシマ",
     "price": 18500,
-    "img": "https://climaxcard.github.io/climax5/gazou/199.png"
+    "img": "https://climaxcard.github.io/climax5/gazou/198.png"
   },
   {
     "name": "ホワイトフレア BOX",
@@ -328,6 +323,11 @@
     "name": "熱風のアリーナ BOX",
     "price": 18000,
     "img": "https://climaxcard.github.io/climax5/gazou/4.png"
+  },
+  {
+    "name": "インフェルノX BOX",
+    "price": 17700,
+    "img": "https://climaxcard.github.io/climax5/gazou/199.png"
   },
   {
     "name": "摩天パーフェクトBOX",
@@ -351,7 +351,7 @@
   },
   {
     "name": "スペシャルBOX ポケモンセンターフクオカ",
-    "price": 16200,
+    "price": 16000,
     "img": "https://climaxcard.github.io/climax5/gazou/200.png"
   },
   {
@@ -411,7 +411,7 @@
   },
   {
     "name": "クレイバーストBOX",
-    "price": 11400,
+    "price": 11200,
     "img": "https://climaxcard.github.io/climax5/gazou/24.png"
   },
   {
@@ -426,7 +426,7 @@
   },
   {
     "name": "スノーハザードBOX",
-    "price": 10300,
+    "price": 10200,
     "img": "https://climaxcard.github.io/climax5/gazou/23.png"
   },
   {
@@ -471,7 +471,7 @@
   },
   {
     "name": "ニンジャスピナー BOX",
-    "price": 9200,
+    "price": 9000,
     "img": "https://static.mycalinks.io/app/item/image/box/M4_b.jpg"
   },
   {
@@ -481,7 +481,7 @@
   },
   {
     "name": "ムニキスゼロ BOX",
-    "price": 7400,
+    "price": 7300,
     "img": "https://static.mycalinks.io/app/item/image/box/M3_b.jpg"
   }
 ]

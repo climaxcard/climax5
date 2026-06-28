@@ -42,7 +42,8 @@ set "PSA_HTML_PATH=%PSA_OUT_HTML_DIR%\index.html"
 set "PSA_OUT_DIR=%BOX_TOOLS_DIR%\out_png_psa"
 
 REM PNG保存先も英数字フォルダ
-set "PNG_SAVE_DIR=C:\Users\user\OneDrive\Desktop\ポケカラッシュ"
+REM PNG保存先
+set "PNG_SAVE_DIR=C:\Users\user\OneDrive\ドキュメント\Desktop\ポケカラッシュ"
 REM ==================================================
 REM ログ設定
 REM ==================================================

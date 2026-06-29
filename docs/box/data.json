@@ -375,11 +375,6 @@
     "img": "https://climaxcard.github.io/climax5/gazou/35.png"
   },
   {
-    "name": "MEGAドリームex BOX",
-    "price": 13500,
-    "img": "https://climaxcard.github.io/climax5/gazou/201.png"
-  },
-  {
     "name": "バトルリージョン BOX",
     "price": 12300,
     "img": "https://climaxcard.github.io/climax5/gazou/37.png"
@@ -388,6 +383,11 @@
     "name": "変幻の仮面 BOX",
     "price": 12200,
     "img": "https://climaxcard.github.io/climax5/gazou/11.png"
+  },
+  {
+    "name": "MEGAドリームex BOX",
+    "price": 12100,
+    "img": "https://climaxcard.github.io/climax5/gazou/201.png"
   },
   {
     "name": "クリムゾンヘイズ BOX",

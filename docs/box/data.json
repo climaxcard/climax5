@@ -60,24 +60,19 @@
     "img": "https://climaxcard.github.io/climax5/gazou/68.png"
   },
   {
-    "name": "スカイレジェンドBOX",
-    "price": 120000,
-    "img": "https://climaxcard.github.io/climax5/gazou/70.png"
-  },
-  {
     "name": "イーブイヒーローズBOX",
     "price": 115000,
     "img": "https://climaxcard.github.io/climax5/gazou/48.png"
   },
   {
-    "name": "ダブルブレイズBOX",
-    "price": 113000,
-    "img": "https://climaxcard.github.io/climax5/gazou/73.png"
-  },
-  {
     "name": "サン&ムーンBOX",
     "price": 111000,
     "img": "https://climaxcard.github.io/climax5/gazou/101.png"
+  },
+  {
+    "name": "スカイレジェンドBOX",
+    "price": 111000,
+    "img": "https://climaxcard.github.io/climax5/gazou/70.png"
   },
   {
     "name": "超爆インパクトBOX",
@@ -96,8 +91,13 @@
   },
   {
     "name": "VMAXライジングBOX",
-    "price": 95000,
+    "price": 93200,
     "img": "https://climaxcard.github.io/climax5/gazou/61.png"
+  },
+  {
+    "name": "ダブルブレイズBOX",
+    "price": 91800,
+    "img": "https://climaxcard.github.io/climax5/gazou/73.png"
   },
   {
     "name": "チャンピオンロードBOX",
@@ -135,14 +135,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/87.png"
   },
   {
-    "name": "迅雷スパークBOX",
-    "price": 64000,
-    "img": "https://climaxcard.github.io/climax5/gazou/83.png"
-  },
-  {
     "name": "ウルトラサンBOX",
     "price": 62500,
     "img": "https://climaxcard.github.io/climax5/gazou/90.png"
+  },
+  {
+    "name": "迅雷スパークBOX",
+    "price": 61500,
+    "img": "https://climaxcard.github.io/climax5/gazou/83.png"
   },
   {
     "name": "25th ANNIVERSARY COLLECTION BOX",
@@ -151,18 +151,18 @@
   },
   {
     "name": "フルメタルウォールBOX",
-    "price": 59500,
+    "price": 55000,
     "img": "https://climaxcard.github.io/climax5/gazou/74.png"
-  },
-  {
-    "name": "オルタージェネシスBOX",
-    "price": 57400,
-    "img": "https://climaxcard.github.io/climax5/gazou/66.png"
   },
   {
     "name": "反逆クラッシュBOX",
     "price": 55000,
     "img": "https://climaxcard.github.io/climax5/gazou/60.png"
+  },
+  {
+    "name": "オルタージェネシスBOX",
+    "price": 52300,
+    "img": "https://climaxcard.github.io/climax5/gazou/66.png"
   },
   {
     "name": "ポケモンカード151 BOX",
@@ -173,11 +173,6 @@
     "name": "「ソード」BOX",
     "price": 51000,
     "img": "https://climaxcard.github.io/climax5/gazou/63.png"
-  },
-  {
-    "name": "連撃マスターBOX",
-    "price": 51000,
-    "img": "https://climaxcard.github.io/climax5/gazou/52.png"
   },
   {
     "name": "ムゲンゾーンBOX",
@@ -200,6 +195,11 @@
     "img": "https://climaxcard.github.io/climax5/gazou/42.png"
   },
   {
+    "name": "連撃マスターBOX",
+    "price": 50000,
+    "img": "https://climaxcard.github.io/climax5/gazou/52.png"
+  },
+  {
     "name": "一撃マスターBOX",
     "price": 47500,
     "img": "https://climaxcard.github.io/climax5/gazou/53.png"
@@ -210,19 +210,9 @@
     "img": "https://climaxcard.github.io/climax5/gazou/32.png"
   },
   {
-    "name": "仰天のボルテッカーBOX",
-    "price": 45500,
-    "img": "https://climaxcard.github.io/climax5/gazou/56.png"
-  },
-  {
     "name": "爆炎ウォーカーBOX",
     "price": 43400,
     "img": "https://climaxcard.github.io/climax5/gazou/59.png"
-  },
-  {
-    "name": "伝説の鼓動BOX",
-    "price": 43000,
-    "img": "https://climaxcard.github.io/climax5/gazou/57.png"
   },
   {
     "name": "双璧のファイターBOX",
@@ -230,9 +220,19 @@
     "img": "https://climaxcard.github.io/climax5/gazou/51.png"
   },
   {
+    "name": "仰天のボルテッカーBOX",
+    "price": 41500,
+    "img": "https://climaxcard.github.io/climax5/gazou/56.png"
+  },
+  {
     "name": "ダークオーダーBOX",
     "price": 41000,
     "img": "https://climaxcard.github.io/climax5/gazou/80.png"
+  },
+  {
+    "name": "伝説の鼓動BOX",
+    "price": 40500,
+    "img": "https://climaxcard.github.io/climax5/gazou/57.png"
   },
   {
     "name": "Pokemon GO BOX",

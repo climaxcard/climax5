@@ -165,14 +165,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/66.png"
   },
   {
-    "name": "ポケモンカード151 BOX",
-    "price": 51200,
-    "img": "https://climaxcard.github.io/climax5/gazou/22.png"
-  },
-  {
     "name": "「ソード」BOX",
     "price": 51000,
     "img": "https://climaxcard.github.io/climax5/gazou/63.png"
+  },
+  {
+    "name": "ポケモンカード151 BOX",
+    "price": 51000,
+    "img": "https://climaxcard.github.io/climax5/gazou/22.png"
   },
   {
     "name": "ムゲンゾーンBOX",
@@ -326,18 +326,18 @@
   },
   {
     "name": "インフェルノX BOX",
-    "price": 17000,
+    "price": 17200,
     "img": "https://climaxcard.github.io/climax5/gazou/199.png"
-  },
-  {
-    "name": "黒炎の支配者 BOX",
-    "price": 17000,
-    "img": "https://climaxcard.github.io/climax5/gazou/21.png"
   },
   {
     "name": "摩天パーフェクトBOX",
     "price": 16900,
     "img": "https://climaxcard.github.io/climax5/gazou/46.png"
+  },
+  {
+    "name": "黒炎の支配者 BOX",
+    "price": 16900,
+    "img": "https://climaxcard.github.io/climax5/gazou/21.png"
   },
   {
     "name": "シャイニートレジャーex BOX",
@@ -346,7 +346,7 @@
   },
   {
     "name": "トリプレットビートBOX",
-    "price": 16300,
+    "price": 16400,
     "img": "https://climaxcard.github.io/climax5/gazou/25.png"
   },
   {
@@ -466,7 +466,7 @@
   },
   {
     "name": "ニンジャスピナー BOX",
-    "price": 9000,
+    "price": 8800,
     "img": "https://static.mycalinks.io/app/item/image/box/M4_b.jpg"
   },
   {
@@ -476,12 +476,12 @@
   },
   {
     "name": "アビスアイ BOX",
-    "price": 7400,
+    "price": 7800,
     "img": "https://static.mycalinks.io/app/item/image/box/M5_b.jpg"
   },
   {
     "name": "ムニキスゼロ BOX",
-    "price": 7200,
+    "price": 7500,
     "img": "https://static.mycalinks.io/app/item/image/box/M3_b.jpg"
   }
 ]

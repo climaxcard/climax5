@@ -50,14 +50,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/92.png"
   },
   {
+    "name": "イーブイヒーローズBOX",
+    "price": 120000,
+    "img": "https://climaxcard.github.io/climax5/gazou/48.png"
+  },
+  {
     "name": "リミックスバウトBOX",
     "price": 120000,
     "img": "https://climaxcard.github.io/climax5/gazou/68.png"
-  },
-  {
-    "name": "イーブイヒーローズBOX",
-    "price": 117000,
-    "img": "https://climaxcard.github.io/climax5/gazou/48.png"
   },
   {
     "name": "超爆インパクトBOX",
@@ -190,6 +190,11 @@
     "img": "https://climaxcard.github.io/climax5/gazou/52.png"
   },
   {
+    "name": "ロストアビス BOX",
+    "price": 47000,
+    "img": "https://climaxcard.github.io/climax5/gazou/32.png"
+  },
+  {
     "name": "一撃マスターBOX",
     "price": 47000,
     "img": "https://climaxcard.github.io/climax5/gazou/53.png"
@@ -198,11 +203,6 @@
     "name": "爆炎ウォーカーBOX",
     "price": 47000,
     "img": "https://climaxcard.github.io/climax5/gazou/59.png"
-  },
-  {
-    "name": "ロストアビス BOX",
-    "price": 46000,
-    "img": "https://climaxcard.github.io/climax5/gazou/32.png"
   },
   {
     "name": "双璧のファイターBOX",
@@ -240,14 +240,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/34.png"
   },
   {
+    "name": "超電ブレイカー BOX",
+    "price": 28000,
+    "img": "https://climaxcard.github.io/climax5/gazou/7.png"
+  },
+  {
     "name": "VSTARユニバース BOX",
     "price": 27000,
     "img": "https://climaxcard.github.io/climax5/gazou/28.png"
-  },
-  {
-    "name": "超電ブレイカー BOX",
-    "price": 27000,
-    "img": "https://climaxcard.github.io/climax5/gazou/7.png"
   },
   {
     "name": "漆黒のガイストBOX",
@@ -275,19 +275,19 @@
     "img": "https://climaxcard.github.io/climax5/gazou/195.png"
   },
   {
-    "name": "シャイニースターV BOX",
-    "price": 19000,
-    "img": "https://climaxcard.github.io/climax5/gazou/55.png"
-  },
-  {
     "name": "パラダイムトリガー BOX",
-    "price": 19000,
+    "price": 20000,
     "img": "https://climaxcard.github.io/climax5/gazou/30.png"
   },
   {
     "name": "ブラックボルト BOX",
-    "price": 19000,
+    "price": 20000,
     "img": "https://climaxcard.github.io/climax5/gazou/2.png"
+  },
+  {
+    "name": "シャイニースターV BOX",
+    "price": 19000,
+    "img": "https://climaxcard.github.io/climax5/gazou/55.png"
   },
   {
     "name": "白銀のランスBOX",
@@ -355,14 +355,14 @@
     "img": "https://climaxcard.github.io/climax5/gazou/8.png"
   },
   {
+    "name": "スペースジャグラー BOX",
+    "price": 14000,
+    "img": "https://climaxcard.github.io/climax5/gazou/35.png"
+  },
+  {
     "name": "タイムゲイザー BOX",
     "price": 14000,
     "img": "https://climaxcard.github.io/climax5/gazou/36.png"
-  },
-  {
-    "name": "スペースジャグラー BOX",
-    "price": 13000,
-    "img": "https://climaxcard.github.io/climax5/gazou/35.png"
   },
   {
     "name": "MEGAドリームex BOX",
@@ -373,6 +373,11 @@
     "name": "クリムゾンヘイズ BOX",
     "price": 12000,
     "img": "https://climaxcard.github.io/climax5/gazou/12.png"
+  },
+  {
+    "name": "スカーレットEX BOX",
+    "price": 12000,
+    "img": "https://climaxcard.github.io/climax5/gazou/27.png"
   },
   {
     "name": "バトルリージョン BOX",
@@ -388,11 +393,6 @@
     "name": "クレイバーストBOX",
     "price": 11000,
     "img": "https://climaxcard.github.io/climax5/gazou/24.png"
-  },
-  {
-    "name": "スカーレットEX BOX",
-    "price": 11000,
-    "img": "https://climaxcard.github.io/climax5/gazou/27.png"
   },
   {
     "name": "レイジングサーフ BOX",
@@ -436,42 +436,42 @@
   },
   {
     "name": "未来の一閃 BOX",
-    "price": 9800,
+    "price": 10000,
     "img": "https://climaxcard.github.io/climax5/gazou/17.png"
   },
   {
     "name": "ステラミラクル BOX",
-    "price": 9700,
+    "price": 9800,
     "img": "https://climaxcard.github.io/climax5/gazou/9.png"
   },
   {
     "name": "バイオレットEX BOX",
-    "price": 9500,
+    "price": 9600,
     "img": "https://climaxcard.github.io/climax5/gazou/26.png"
   },
   {
     "name": "バトルパートナーズ BOX",
-    "price": 9400,
+    "price": 9600,
     "img": "https://climaxcard.github.io/climax5/gazou/5.png"
   },
   {
     "name": "ニンジャスピナー BOX",
-    "price": 9300,
+    "price": 9500,
     "img": "https://static.mycalinks.io/app/item/image/box/M4_b.jpg"
   },
   {
     "name": "メガシンフォニア BOX",
-    "price": 9200,
+    "price": 9300,
     "img": "https://climaxcard.github.io/climax5/gazou/196.png"
   },
   {
     "name": "白熱のアルカナ BOX",
-    "price": 9100,
+    "price": 9200,
     "img": "https://climaxcard.github.io/climax5/gazou/31.png"
   },
   {
     "name": "ムニキスゼロ BOX",
-    "price": 7700,
+    "price": 7800,
     "img": "https://static.mycalinks.io/app/item/image/box/M3_b.jpg"
   }
 ]

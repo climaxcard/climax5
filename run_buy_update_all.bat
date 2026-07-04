@@ -232,7 +232,31 @@ if not "%ERRORLEVEL%"=="0" (
   exit /b 1
 )
 
-call :RUN aws s3 sync "%REPO_DIR%\docs" "s3://%S3_BUCKET%/%S3_PREFIX%/" --delete --cache-control "no-cache, no-store, must-revalidate"
+REM --------------------------------------------------
+REM Lightweight S3 deploy
+REM 1) Small files: sync with --delete
+REM 2) Heavy generated images: sync without --delete and with --size-only
+REM --------------------------------------------------
+call :LOG "[S3] small files sync start"
+call :RUN aws s3 sync "%REPO_DIR%\docs" "s3://%S3_BUCKET%/%S3_PREFIX%/" --delete --cache-control "no-cache, no-store, must-revalidate" --exclude "assets/thumbs/*" --exclude "box/assets/img/*" --exclude "psa/assets/img/*" --exclude "box_png/*" --exclude "psa_png/*"
+
+call :LOG "[S3] heavy assets sync start"
+if exist "%REPO_DIR%\docs\assets\thumbs" (
+  call :RUN aws s3 sync "%REPO_DIR%\docs\assets\thumbs" "s3://%S3_BUCKET%/%S3_PREFIX%/assets/thumbs/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
+)
+if exist "%REPO_DIR%\docs\box\assets\img" (
+  call :RUN aws s3 sync "%REPO_DIR%\docs\box\assets\img" "s3://%S3_BUCKET%/%S3_PREFIX%/box/assets/img/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
+)
+if exist "%REPO_DIR%\docs\psa\assets\img" (
+  call :RUN aws s3 sync "%REPO_DIR%\docs\psa\assets\img" "s3://%S3_BUCKET%/%S3_PREFIX%/psa/assets/img/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
+)
+if exist "%REPO_DIR%\docs\box_png" (
+  call :RUN aws s3 sync "%REPO_DIR%\docs\box_png" "s3://%S3_BUCKET%/%S3_PREFIX%/box_png/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
+)
+if exist "%REPO_DIR%\docs\psa_png" (
+  call :RUN aws s3 sync "%REPO_DIR%\docs\psa_png" "s3://%S3_BUCKET%/%S3_PREFIX%/psa_png/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
+)
+
 call :RUN aws cloudfront create-invalidation --distribution-id "%CF_DIST_ID%" --paths "/%S3_PREFIX%/*"
 
 call :LOG "===== S3 DEPLOY END ====="

@@ -205,11 +205,6 @@
     "img": "https://climaxcard.github.io/climax5/gazou/59.png"
   },
   {
-    "name": "双璧のファイターBOX",
-    "price": 42000,
-    "img": "https://climaxcard.github.io/climax5/gazou/51.png"
-  },
-  {
     "name": "ダークオーダーBOX",
     "price": 41000,
     "img": "https://climaxcard.github.io/climax5/gazou/80.png"
@@ -223,6 +218,11 @@
     "name": "伝説の鼓動BOX",
     "price": 40000,
     "img": "https://climaxcard.github.io/climax5/gazou/57.png"
+  },
+  {
+    "name": "双璧のファイターBOX",
+    "price": 40000,
+    "img": "https://climaxcard.github.io/climax5/gazou/51.png"
   },
   {
     "name": "Pokemon GO BOX",

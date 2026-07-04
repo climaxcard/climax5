@@ -44,6 +44,14 @@ set "PSA_OUT_DIR=%BOX_TOOLS_DIR%\out_png_psa"
 REM PNG保存先も英数字フォルダ
 REM PNG保存先
 set "PNG_SAVE_DIR=C:\Users\user\OneDrive\ドキュメント\Desktop\ポケカラッシュ"
+
+REM ==================================================
+REM S3 / CloudFront settings
+REM ==================================================
+set "S3_BUCKET=climax-kaitori-static"
+set "S3_PREFIX=pokemon"
+set "CF_DIST_ID=E51XRDVR8AQAD"
+set "PUBLIC_URL=https://kaitori.climax-card.com/pokemon/default/"
 REM ==================================================
 REM ログ設定
 REM ==================================================
@@ -71,6 +79,10 @@ call :LOG "BOX_TOOLS_DIR=%BOX_TOOLS_DIR%"
 call :LOG "BOX_HTML_PATH=%BOX_HTML_PATH%"
 call :LOG "PSA_HTML_PATH=%PSA_HTML_PATH%"
 call :LOG "PNG_SAVE_DIR=%PNG_SAVE_DIR%"
+call :LOG "S3_BUCKET=%S3_BUCKET%"
+call :LOG "S3_PREFIX=%S3_PREFIX%"
+call :LOG "CF_DIST_ID=%CF_DIST_ID%"
+call :LOG "PUBLIC_URL=%PUBLIC_URL%"
 call :LOG "LOG_FILE=%LOG_FILE%"
 call :LOG "==============="
 
@@ -196,7 +208,35 @@ if not "%COMMIT_RC%"=="0" (
   call :LOG "[INFO] git commit skipped or no changes. RC=%COMMIT_RC%"
 )
 
+call :RUN git pull --rebase --autostash origin main
 call :RUN git push origin main
+
+REM ==================================================
+REM S3 / CloudFront reflect
+REM ==================================================
+call :LOG "===== S3 DEPLOY START ====="
+
+where aws >nul 2>&1
+if not "%ERRORLEVEL%"=="0" (
+  call :LOG "[ERROR] AWS CLI not found"
+  start "" notepad "%LOG_FILE%"
+  pause
+  exit /b 1
+)
+
+aws sts get-caller-identity >> "%LOG_FILE%" 2>&1
+if not "%ERRORLEVEL%"=="0" (
+  call :LOG "[ERROR] AWS CLI credential is invalid or not configured"
+  start "" notepad "%LOG_FILE%"
+  pause
+  exit /b 1
+)
+
+call :RUN aws s3 sync "%REPO_DIR%\docs" "s3://%S3_BUCKET%/%S3_PREFIX%/" --delete --cache-control "no-cache, no-store, must-revalidate"
+call :RUN aws cloudfront create-invalidation --distribution-id "%CF_DIST_ID%" --paths "/%S3_PREFIX%/*"
+
+call :LOG "===== S3 DEPLOY END ====="
+call :LOG "[URL] %PUBLIC_URL%"
 
 call :LOG "===== DONE ====="
 

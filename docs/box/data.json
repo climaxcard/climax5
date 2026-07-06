@@ -405,11 +405,6 @@
     "img": "https://climaxcard.github.io/climax5/gazou/14.png"
   },
   {
-    "name": "アビスアイ BOX",
-    "price": 10000,
-    "img": "https://static.mycalinks.io/app/item/image/box/M5_b.jpg"
-  },
-  {
     "name": "サイバージャッジ BOX",
     "price": 10000,
     "img": "https://climaxcard.github.io/climax5/gazou/13.png"
@@ -440,28 +435,33 @@
     "img": "https://climaxcard.github.io/climax5/gazou/17.png"
   },
   {
+    "name": "アビスアイ BOX",
+    "price": 9800,
+    "img": "https://static.mycalinks.io/app/item/image/box/M5_b.jpg"
+  },
+  {
     "name": "ステラミラクル BOX",
     "price": 9800,
     "img": "https://climaxcard.github.io/climax5/gazou/9.png"
   },
   {
     "name": "バイオレットEX BOX",
-    "price": 9600,
+    "price": 9800,
     "img": "https://climaxcard.github.io/climax5/gazou/26.png"
   },
   {
     "name": "バトルパートナーズ BOX",
-    "price": 9600,
+    "price": 9700,
     "img": "https://climaxcard.github.io/climax5/gazou/5.png"
   },
   {
     "name": "ニンジャスピナー BOX",
-    "price": 9500,
+    "price": 9400,
     "img": "https://static.mycalinks.io/app/item/image/box/M4_b.jpg"
   },
   {
     "name": "メガシンフォニア BOX",
-    "price": 9300,
+    "price": 9400,
     "img": "https://climaxcard.github.io/climax5/gazou/196.png"
   },
   {
@@ -471,7 +471,7 @@
   },
   {
     "name": "ムニキスゼロ BOX",
-    "price": 7800,
+    "price": 7700,
     "img": "https://static.mycalinks.io/app/item/image/box/M3_b.jpg"
   }
 ]

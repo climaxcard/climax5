@@ -1,315 +1,328 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 setlocal EnableExtensions EnableDelayedExpansion
+set "PYTHONUTF8=1"
+set "PYTHONIOENCODING=utf-8"
 
-REM ==================================================
-REM 設定
-REM ==================================================
-set "REPO_DIR=C:\Users\user\ClimaxGit\climax5"
+REM ============================================================
+REM POKEMON buylist update + SAFE deploy
+REM - UTF-8 no BOM recommended
+REM - Never sync S3 root
+REM - Never use S3 --delete
+REM - External JSON mode: upload buylist.json
+REM - Embedded HTML mode: upload index.html only
+REM ============================================================
+
+set "ROOT=C:\Users\user\ClimaxGit\climax5"
+set "SCRIPTS=%ROOT%\scripts"
 set "PYTHON_EXE=python"
 
-set "SCRIPT_TORECA=%REPO_DIR%\scrape_torecabirth_pk_purchase.py"
-set "SCRIPT_CARDRUSH=%REPO_DIR%\update_buy_price_from_cardrush.py"
-set "SCRIPT_LOUNGE_PSA10=%REPO_DIR%\scrape_toreca_lounge_psa10.py"
-set "SCRIPT_LOUNGE_BOX=%REPO_DIR%\scrape_toreca_lounge_box_and_merge.py"
-set "SCRIPT_CSV=%REPO_DIR%\export_sheet1_to_csv.py"
-set "BUILD_SCRIPT=gen_buylist.py"
+set "DOCS_DIR=%ROOT%\docs"
+set "SCRIPTS_DOCS_DIR=%SCRIPTS%\docs"
+set "INDEX_HTML="
+set "BUYLIST_JSON="
+set "NEEDS_JSON=0"
 
-set "DOCS_DEFAULT=docs\default"
-set "DOCS_ROOT=docs"
-set "DOCS_PRICE_ASC=docs\price_asc"
-set "DOCS_PRICE_DESC=docs\price_desc"
-
-set "GAZOU_DIR=gazou"
-set "DOCS_GAZOU_DIR=docs\gazou"
-
-REM ==================================================
-REM BOX / PSA tools
-REM ==================================================
-set "BOX_TOOLS_DIR=%REPO_DIR%\box_tools"
-
-set "BOX_GEN_SCRIPT=%BOX_TOOLS_DIR%\generate_box_buylist.py"
-set "BOX_RENDER_SCRIPT=%BOX_TOOLS_DIR%\render_box_buylist_png.py"
-
-set "BOX_OUT_HTML_DIR=%REPO_DIR%\docs\box"
-set "BOX_HTML_PATH=%BOX_OUT_HTML_DIR%\index.html"
-set "BOX_OUT_DIR=%BOX_TOOLS_DIR%\out_png"
-
-set "PSA_GEN_SCRIPT=%BOX_TOOLS_DIR%\generate_psa_buylist.py"
-set "PSA_RENDER_SCRIPT=%BOX_TOOLS_DIR%\html_to_png.py"
-set "PSA_OUT_HTML_DIR=%REPO_DIR%\docs\psa"
-set "PSA_HTML_PATH=%PSA_OUT_HTML_DIR%\index.html"
-set "PSA_OUT_DIR=%BOX_TOOLS_DIR%\out_png_psa"
-
-REM PNG保存先も英数字フォルダ
-REM PNG保存先
-set "PNG_SAVE_DIR=C:\Users\user\OneDrive\ドキュメント\Desktop\ポケカラッシュ"
-
-REM ==================================================
-REM S3 / CloudFront settings
-REM ==================================================
 set "S3_BUCKET=climax-kaitori-static"
 set "S3_PREFIX=pokemon"
 set "CF_DIST_ID=E51XRDVR8AQAD"
 set "PUBLIC_URL=https://kaitori.climax-card.com/pokemon/default/"
-REM ==================================================
-REM ログ設定
-REM ==================================================
-set "LOG_DIR=%REPO_DIR%\logs"
-if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 
-for /f "tokens=1-3 delims=/ " %%a in ("%date%") do set "D=%%a%%b%%c"
-for /f "tokens=1-3 delims=:." %%a in ("%time%") do set "T=%%a%%b%%c"
-set "T=%T: =0%"
-set "LOG_FILE=%LOG_DIR%\run_%D%_%T%.log"
+set "OUTPUT_DIR=C:\Users\user\OneDrive\ドキュメント\Desktop\ポケカラッシュ"
+set "MYCA_CSV_OUT=%OUTPUT_DIR%"
+set "MYCA_CSV_NAME=POKEMON_Myca_upload.csv"
+set "MYCA_CSV_PATH=%MYCA_CSV_OUT%\%MYCA_CSV_NAME%"
+set "XLSM="
 
-echo ================================================== > "%LOG_FILE%"
-echo START: %date% %time%>> "%LOG_FILE%"
-echo BAT: %~f0>> "%LOG_FILE%"
-echo ==================================================>> "%LOG_FILE%"
+set "LOG_DIR=%ROOT%\logs"
+if not exist "%LOG_DIR%" mkdir "%LOG_DIR%" >nul 2>&1
+set "LOG_FILE=%LOG_DIR%\safe_pokemon_update_final.log"
+
+> "%LOG_FILE%" echo ===== POKEMON SAFE UPDATE START %date% %time% =====
+
+call :CHECK_TOOL "%PYTHON_EXE%" || goto :END_FAIL
+call :CHECK_TOOL git || goto :END_FAIL
+call :CHECK_TOOL aws || goto :END_FAIL
+
+if not exist "%ROOT%" call :DIE "ROOT not found: %ROOT%"
+if not exist "%DOCS_DIR%" mkdir "%DOCS_DIR%" >> "%LOG_FILE%" 2>&1
+if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%" >> "%LOG_FILE%" 2>&1
+
+call :RESOLVE_XLSM
+
+call :LOG "[0/8] Optional git pull"
+cd /d "%ROOT%" || call :DIE "cd failed: %ROOT%"
+call :SAFE_GIT_PULL
+
+call :LOG "[0.5/8] Python dependencies"
+call :RUN "%PYTHON_EXE%" -m pip install -q beautifulsoup4 pandas openpyxl requests pillow lxml playwright
+
+call :LOG "[1/8] Main update scripts"
+cd /d "%ROOT%" || call :DIE "cd failed: %ROOT%"
+call :LOG "[INFO] No required main scripts set."
+
+call :LOG "[2/8] Optional update scripts"
+cd /d "%ROOT%" || call :DIE "cd failed: %ROOT%"
+if exist "%ROOT%\scrape_torecabirth_pk_purchase.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\scrape_torecabirth_pk_purchase.py"
+) else (
+  call :LOG "[WARN] Missing optional script. Skip: scrape_torecabirth_pk_purchase.py"
+)
+if exist "%ROOT%\update_buy_price_from_cardrush.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\update_buy_price_from_cardrush.py"
+) else (
+  call :LOG "[WARN] Missing optional script. Skip: update_buy_price_from_cardrush.py"
+)
+if exist "%ROOT%\scrape_toreca_lounge_box_and_merge.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\scrape_toreca_lounge_box_and_merge.py"
+) else (
+  call :LOG "[WARN] Missing optional script. Skip: scrape_toreca_lounge_box_and_merge.py"
+)
+if exist "%ROOT%\scrape_toreca_lounge_psa10.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\scrape_toreca_lounge_psa10.py"
+) else (
+  call :LOG "[WARN] Missing optional script. Skip: scrape_toreca_lounge_psa10.py"
+)
+if exist "%ROOT%\export_sheet1_to_csv.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\export_sheet1_to_csv.py"
+) else (
+  call :LOG "[WARN] Missing optional script. Skip: export_sheet1_to_csv.py"
+)
+
+call :LOG "[3/8] Build static pages"
+set "BUILD_DONE="
+if not defined BUILD_DONE if exist "%ROOT%\generate_buylist.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\generate_buylist.py"
+  set "BUILD_DONE=1"
+)
+if not defined BUILD_DONE if exist "%ROOT%\gen_buylist.py" (
+  call :RUN "%PYTHON_EXE%" "%ROOT%\gen_buylist.py"
+  set "BUILD_DONE=1"
+)
+if not defined BUILD_DONE if exist "%SCRIPTS%\generate_buylist.py" (
+  call :RUN "%PYTHON_EXE%" "%SCRIPTS%\generate_buylist.py"
+  set "BUILD_DONE=1"
+)
+if not defined BUILD_DONE if exist "%SCRIPTS%\gen_buylist.py" (
+  call :RUN "%PYTHON_EXE%" "%SCRIPTS%\gen_buylist.py"
+  set "BUILD_DONE=1"
+)
+if not defined BUILD_DONE call :DIE "No build script found or build did not run."
+
+call :LOG "[4/8] Normalize build output"
+if exist "%SCRIPTS_DOCS_DIR%\default\index.html" (
+  call :LOG "[INFO] scripts\docs output found. Copy to root docs."
+  robocopy "%SCRIPTS_DOCS_DIR%" "%DOCS_DIR%" /E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /NFL /NDL /NJH /NJS >> "%LOG_FILE%" 2>&1
+  set "ROBO_RC=!ERRORLEVEL!"
+  if !ROBO_RC! GEQ 8 call :DIE "robocopy scripts\docs to docs failed RC=!ROBO_RC!"
+) else (
+  call :LOG "[INFO] scripts\docs output not found. Use root docs."
+)
+
+call :LOG "[5/8] Verify outputs and detect data mode"
+call :RESOLVE_INDEX_HTML
+call :DETECT_DATA_MODE
+
+call :LOG "[6/8] Git commit and push best effort"
+cd /d "%ROOT%" || call :DIE "cd failed: %ROOT%"
+git add docs >> "%LOG_FILE%" 2>&1
+git add "%~nx0" >> "%LOG_FILE%" 2>&1
+git diff --cached --quiet
+if errorlevel 1 (
+  git commit -m "update pokemon buylist" >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :LOG "[WARN] git commit failed. Continue."
+  git pull --rebase --autostash >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :LOG "[WARN] git pull after commit failed. Continue."
+  git push >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :LOG "[WARN] git push failed. Continue."
+) else (
+  call :LOG "[INFO] No git changes."
+)
+
+call :LOG "[7/8] Safe S3 upload"
+call :DEPLOY_SAFE
 
 echo.
-echo [INFO] ログ: %LOG_FILE%
-echo.
+echo [OK] Done: %PUBLIC_URL%
+echo [LOG] %LOG_FILE%
+pause
+exit /b 0
 
-call :LOG "===== ENV ====="
-call :LOG "REPO_DIR=%REPO_DIR%"
-call :LOG "PYTHON_EXE=%PYTHON_EXE%"
-call :LOG "BOX_TOOLS_DIR=%BOX_TOOLS_DIR%"
-call :LOG "BOX_HTML_PATH=%BOX_HTML_PATH%"
-call :LOG "PSA_HTML_PATH=%PSA_HTML_PATH%"
-call :LOG "PNG_SAVE_DIR=%PNG_SAVE_DIR%"
-call :LOG "S3_BUCKET=%S3_BUCKET%"
-call :LOG "S3_PREFIX=%S3_PREFIX%"
-call :LOG "CF_DIST_ID=%CF_DIST_ID%"
-call :LOG "PUBLIC_URL=%PUBLIC_URL%"
-call :LOG "LOG_FILE=%LOG_FILE%"
-call :LOG "==============="
 
-REM ==================================================
-REM 事前フォルダ準備
-REM ==================================================
-if not exist "%PNG_SAVE_DIR%\" mkdir "%PNG_SAVE_DIR%" >> "%LOG_FILE%" 2>&1
-if not exist "%BOX_OUT_HTML_DIR%\" mkdir "%BOX_OUT_HTML_DIR%" >> "%LOG_FILE%" 2>&1
-if not exist "%BOX_OUT_DIR%\" mkdir "%BOX_OUT_DIR%" >> "%LOG_FILE%" 2>&1
-if not exist "%PSA_OUT_HTML_DIR%\" mkdir "%PSA_OUT_HTML_DIR%" >> "%LOG_FILE%" 2>&1
-if not exist "%PSA_OUT_DIR%\" mkdir "%PSA_OUT_DIR%" >> "%LOG_FILE%" 2>&1
+REM ============================================================
+REM Functions
+REM ============================================================
 
-REM ==================================================
-REM メイン処理
-REM ==================================================
-call :RUN cd /d "%REPO_DIR%"
-
-call :RUN "%PYTHON_EXE%" "%SCRIPT_TORECA%"
-call :RUN "%PYTHON_EXE%" "%SCRIPT_CARDRUSH%"
-call :RUN "%PYTHON_EXE%" "%SCRIPT_LOUNGE_PSA10%"
-call :RUN "%PYTHON_EXE%" "%SCRIPT_LOUNGE_BOX%"
-call :RUN "%PYTHON_EXE%" "%SCRIPT_CSV%"
-call :RUN "%PYTHON_EXE%" "%BUILD_SCRIPT%"
-
-REM ==================================================
-REM EXTRA: BOX
-REM Git push前に生成する
-REM ==================================================
-call :LOG "===== [EXTRA] BOX START ====="
-
-if not exist "%BOX_GEN_SCRIPT%" (
-  call :LOG "[WARN] BOX生成スキップ: %BOX_GEN_SCRIPT% が見つかりません"
-  goto :AFTER_BOX
+:RESOLVE_XLSM
+set "XLSM="
+for %%X in (
+  "%ROOT%\buylist.xlsm"
+  "%ROOT%\data\buylist.xlsm"
+) do (
+  if not defined XLSM (
+    if exist "%%~fX" set "XLSM=%%~fX"
+  )
 )
-
-if not exist "%BOX_RENDER_SCRIPT%" (
-  call :LOG "[WARN] BOX PNG生成スキップ: %BOX_RENDER_SCRIPT% が見つかりません"
-  goto :AFTER_BOX
+if defined XLSM (
+  call :LOG "[INFO] XLSM=%XLSM%"
+) else (
+  call :LOG "[WARN] XLSM not found from candidates. Continue if scripts do not require it."
 )
+exit /b 0
 
-if exist "%BOX_OUT_DIR%\*.png" (
-  del /q "%BOX_OUT_DIR%\*.png" >> "%LOG_FILE%" 2>&1
+
+:RESOLVE_INDEX_HTML
+set "INDEX_HTML="
+for %%I in (
+  "%DOCS_DIR%\default\index.html"
+  "%DOCS_DIR%\default\default\index.html"
+  "%SCRIPTS_DOCS_DIR%\default\index.html"
+  "%SCRIPTS_DOCS_DIR%\default\default\index.html"
+) do (
+  if not defined INDEX_HTML (
+    if exist "%%~fI" set "INDEX_HTML=%%~fI"
+  )
 )
+if not defined INDEX_HTML call :DIE "index.html not found in known output locations"
+call :LOG "[INFO] INDEX_HTML=%INDEX_HTML%"
+exit /b 0
 
-pushd "%BOX_TOOLS_DIR%" >> "%LOG_FILE%" 2>&1
 
-call :RUN "%PYTHON_EXE%" "%BOX_GEN_SCRIPT%" --out "%BOX_OUT_HTML_DIR%"
-call :RUN "%PYTHON_EXE%" "%BOX_RENDER_SCRIPT%" --html "%BOX_HTML_PATH%" --out "%BOX_OUT_DIR%"
+:DETECT_DATA_MODE
+set "BUYLIST_JSON="
+set "NEEDS_JSON=0"
 
-popd >> "%LOG_FILE%" 2>&1
+findstr /i "__BUYLIST_API__ buylist.json" "%INDEX_HTML%" >nul 2>&1
+if not errorlevel 1 set "NEEDS_JSON=1"
 
-if exist "%BOX_OUT_DIR%\buylist_page_1.png" (
-  copy /y "%BOX_OUT_DIR%\buylist_page_1.png" "%PNG_SAVE_DIR%\ポケカBOX買取表1.png" >> "%LOG_FILE%" 2>&1
-)
-
-if exist "%BOX_OUT_DIR%\buylist_page_2.png" (
-  copy /y "%BOX_OUT_DIR%\buylist_page_2.png" "%PNG_SAVE_DIR%\ポケカBOX買取表2.png" >> "%LOG_FILE%" 2>&1
-)
-
-:AFTER_BOX
-call :LOG "===== [EXTRA] BOX END ====="
-
-REM ==================================================
-REM EXTRA: PSA
-REM Git push前に生成する
-REM ==================================================
-call :LOG "===== [EXTRA] PSA START ====="
-
-if not exist "%PSA_GEN_SCRIPT%" (
-  call :LOG "[WARN] PSA生成スキップ: %PSA_GEN_SCRIPT% が見つかりません"
-  goto :AFTER_PSA
-)
-
-if not exist "%PSA_RENDER_SCRIPT%" (
-  call :LOG "[WARN] PSA PNG生成スキップ: %PSA_RENDER_SCRIPT% が見つかりません"
-  goto :AFTER_PSA
-)
-
-if exist "%PSA_OUT_DIR%\*.png" (
-  del /q "%PSA_OUT_DIR%\*.png" >> "%LOG_FILE%" 2>&1
-)
-
-pushd "%BOX_TOOLS_DIR%" >> "%LOG_FILE%" 2>&1
-
-call :RUN "%PYTHON_EXE%" "%PSA_GEN_SCRIPT%" --out "%PSA_OUT_HTML_DIR%"
-call :RUN "%PYTHON_EXE%" "%PSA_RENDER_SCRIPT%" --html "%PSA_HTML_PATH%" --out "%PSA_OUT_DIR%" --scale 2.0
-
-popd >> "%LOG_FILE%" 2>&1
-
-set "N=1"
-for %%F in ("%PSA_OUT_DIR%\buylist_page_*.png") do (
-  if exist "%%~fF" (
-    copy /y "%%~fF" "%PNG_SAVE_DIR%\pokemon_psa_buylist_!N!.png" >> "%LOG_FILE%" 2>&1
-    set /a N+=1
+for %%J in (
+  "%DOCS_DIR%\buylist.json"
+  "%DOCS_DIR%\default\buylist.json"
+  "%DOCS_DIR%\default\default\buylist.json"
+  "%ROOT%\buylist.json"
+  "%SCRIPTS_DOCS_DIR%\buylist.json"
+  "%SCRIPTS_DOCS_DIR%\default\buylist.json"
+  "%SCRIPTS_DOCS_DIR%\default\default\buylist.json"
+) do (
+  if not defined BUYLIST_JSON (
+    if exist "%%~fJ" set "BUYLIST_JSON=%%~fJ"
   )
 )
 
-:AFTER_PSA
-call :LOG "===== [EXTRA] PSA END ====="
-
-REM ==================================================
-REM Git反映
-REM BOX/PSA生成後に add / commit / push
-REM ==================================================
-call :RUN git status
-
-REM WEB買取表を全部Gitに反映
-call :RUN git add docs
-
-REM bat自体もGit管理している場合は反映
-if exist "run_buy_update_all.bat" (
-  call :RUN git add "run_buy_update_all.bat"
+if defined BUYLIST_JSON (
+  call :LOG "[INFO] External JSON mode. BUYLIST_JSON=%BUYLIST_JSON%"
+  call :FIX_INDEX_API
+  exit /b 0
 )
 
-REM 画像保存先はGit外なのでgit addしない
-call :LOG "[INFO] PNG_SAVE_DIR is outside git, skip git add"
-
-REM commit は変更なしのとき失敗扱いになるので止めない
-call :LOG "===== git commit (no-fail) ====="
-git commit -m "update buylist, csv, and pages" >> "%LOG_FILE%" 2>&1
-set "COMMIT_RC=%ERRORLEVEL%"
-if not "%COMMIT_RC%"=="0" (
-  call :LOG "[INFO] git commit skipped or no changes. RC=%COMMIT_RC%"
+if "%NEEDS_JSON%"=="1" (
+  call :DIE "index.html requires buylist.json, but buylist.json was not found."
 )
 
-call :RUN git pull --rebase --autostash origin main
-call :RUN git push origin main
+call :LOG "[INFO] Embedded HTML mode. buylist.json not required."
+exit /b 0
 
-REM ==================================================
-REM S3 / CloudFront reflect
-REM ==================================================
-call :LOG "===== S3 DEPLOY START ====="
 
-where aws >nul 2>&1
-if not "%ERRORLEVEL%"=="0" (
-  call :LOG "[ERROR] AWS CLI not found"
-  start "" notepad "%LOG_FILE%"
-  pause
-  exit /b 1
-)
+:FIX_INDEX_API
+call :LOG "[INFO] Fix index.html JSON path to ../buylist.json"
+"%PYTHON_EXE%" -c "from pathlib import Path; import re, os; p=Path(os.environ['INDEX_HTML']); s=p.read_text(encoding='utf-8'); s=re.sub(r'window\.__BUYLIST_API__\s*=\s*[\x22\x27][^\x22\x27]+[\x22\x27];','window.__BUYLIST_API__=\x22../buylist.json\x22;',s); p.write_text(s,encoding='utf-8')" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 call :DIE "Failed to fix JSON path in index.html"
+exit /b 0
 
+
+:DEPLOY_SAFE
 aws sts get-caller-identity >> "%LOG_FILE%" 2>&1
-if not "%ERRORLEVEL%"=="0" (
-  call :LOG "[ERROR] AWS CLI credential is invalid or not configured"
-  start "" notepad "%LOG_FILE%"
-  pause
+if errorlevel 1 call :DIE "AWS credential invalid. Run aws configure."
+
+REM Upload only exact public files. No S3 root sync. No --delete.
+aws s3 cp "%INDEX_HTML%" "s3://%S3_BUCKET%/%S3_PREFIX%/default/index.html" --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html; charset=utf-8" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 call :DIE "S3 upload failed: default/index.html"
+
+if defined BUYLIST_JSON (
+  aws s3 cp "%BUYLIST_JSON%" "s3://%S3_BUCKET%/%S3_PREFIX%/buylist.json" --cache-control "no-cache, no-store, must-revalidate" --content-type "application/json; charset=utf-8" >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :DIE "S3 upload failed: buylist.json"
+) else (
+  call :LOG "[INFO] No buylist.json. Skip JSON upload."
+)
+
+if exist "%DOCS_DIR%\price_asc\index.html" (
+  aws s3 cp "%DOCS_DIR%\price_asc\index.html" "s3://%S3_BUCKET%/%S3_PREFIX%/price_asc/index.html" --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html; charset=utf-8" >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :DIE "S3 upload failed: price_asc/index.html"
+)
+
+if exist "%DOCS_DIR%\price_desc\index.html" (
+  aws s3 cp "%DOCS_DIR%\price_desc\index.html" "s3://%S3_BUCKET%/%S3_PREFIX%/price_desc/index.html" --cache-control "no-cache, no-store, must-revalidate" --content-type "text/html; charset=utf-8" >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :DIE "S3 upload failed: price_desc/index.html"
+)
+
+REM Safe asset upload: limited to this category prefix and no --delete.
+if exist "%DOCS_DIR%\assets" (
+  aws s3 sync "%DOCS_DIR%\assets" "s3://%S3_BUCKET%/%S3_PREFIX%/assets/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors >> "%LOG_FILE%" 2>&1
+  if errorlevel 1 call :DIE "S3 upload failed: assets"
+)
+
+aws cloudfront create-invalidation --distribution-id "%CF_DIST_ID%" --paths "/%S3_PREFIX%/default/*" "/%S3_PREFIX%/buylist.json" "/%S3_PREFIX%/price_asc/*" "/%S3_PREFIX%/price_desc/*" "/%S3_PREFIX%/assets/*" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 call :DIE "CloudFront invalidation failed"
+
+exit /b 0
+
+
+:SAFE_GIT_PULL
+git rev-parse --is-inside-work-tree >> "%LOG_FILE%" 2>&1
+if errorlevel 1 exit /b 0
+
+git diff --quiet
+set "D1=%ERRORLEVEL%"
+git diff --cached --quiet
+set "D2=%ERRORLEVEL%"
+
+if not "%D1%%D2%"=="00" (
+  call :LOG "[WARN] Working tree has local changes. Skip git pull."
+  exit /b 0
+)
+
+git pull --rebase --autostash >> "%LOG_FILE%" 2>&1
+if errorlevel 1 call :LOG "[WARN] git pull failed. Continue."
+
+exit /b 0
+
+
+:CHECK_TOOL
+where %~1 >nul 2>&1
+if errorlevel 1 (
+  echo [ERROR] Tool not found: %~1
+  echo [ERROR] Tool not found: %~1>> "%LOG_FILE%"
   exit /b 1
 )
-
-REM --------------------------------------------------
-REM Lightweight S3 deploy
-REM 1) Small files: sync with --delete
-REM 2) Heavy generated images: sync without --delete and with --size-only
-REM --------------------------------------------------
-call :LOG "[S3] small files sync start"
-call :RUN aws s3 sync "%REPO_DIR%\docs" "s3://%S3_BUCKET%/%S3_PREFIX%/" --delete --cache-control "no-cache, no-store, must-revalidate" --exclude "assets/thumbs/*" --exclude "box/assets/img/*" --exclude "psa/assets/img/*" --exclude "box_png/*" --exclude "psa_png/*"
-
-call :LOG "[S3] heavy assets sync start"
-if exist "%REPO_DIR%\docs\assets\thumbs" (
-  call :RUN aws s3 sync "%REPO_DIR%\docs\assets\thumbs" "s3://%S3_BUCKET%/%S3_PREFIX%/assets/thumbs/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
-)
-if exist "%REPO_DIR%\docs\box\assets\img" (
-  call :RUN aws s3 sync "%REPO_DIR%\docs\box\assets\img" "s3://%S3_BUCKET%/%S3_PREFIX%/box/assets/img/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
-)
-if exist "%REPO_DIR%\docs\psa\assets\img" (
-  call :RUN aws s3 sync "%REPO_DIR%\docs\psa\assets\img" "s3://%S3_BUCKET%/%S3_PREFIX%/psa/assets/img/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
-)
-if exist "%REPO_DIR%\docs\box_png" (
-  call :RUN aws s3 sync "%REPO_DIR%\docs\box_png" "s3://%S3_BUCKET%/%S3_PREFIX%/box_png/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
-)
-if exist "%REPO_DIR%\docs\psa_png" (
-  call :RUN aws s3 sync "%REPO_DIR%\docs\psa_png" "s3://%S3_BUCKET%/%S3_PREFIX%/psa_png/" --size-only --cache-control "public,max-age=31536000,immutable" --only-show-errors
-)
-
-call :RUN aws cloudfront create-invalidation --distribution-id "%CF_DIST_ID%" --paths "/%S3_PREFIX%/*"
-
-call :LOG "===== S3 DEPLOY END ====="
-call :LOG "[URL] %PUBLIC_URL%"
-
-call :LOG "===== DONE ====="
-
-echo.
-echo =====================================
-echo 完了 / ログを開きます
-echo LOG_FILE=%LOG_FILE%
-echo =====================================
-echo.
-
-start "" notepad "%LOG_FILE%"
-echo.
-echo 終了しました。閉じるには何かキーを押してください。
-pause
-endlocal
 exit /b 0
-
-REM ==================================================
-REM サブルーチン
-REM ==================================================
-:LOG
-echo %~1
-echo %~1>> "%LOG_FILE%"
-exit /b 0
-
-:UPDATE_DATE
-"%PYTHON_EXE%" -c "from pathlib import Path; import re, datetime; p=Path(r'%~1'); s=p.read_text(encoding='utf-8'); today=datetime.datetime.now().strftime('%Y/%m/%d'); today_jp=datetime.datetime.now().strftime('%Y年%m月%d日'); s=re.sub(r'\d{4}[/-]\d{1,2}[/-]\d{1,2}', today, s); s=re.sub(r'\d{4}年\d{1,2}月\d{1,2}日', today_jp, s); p.write_text(s,encoding='utf-8')" >> "%LOG_FILE%" 2>&1
-if not "%ERRORLEVEL%"=="0" (
-  call :LOG "[ERROR] 日付更新に失敗: %~1"
-  pause
-  exit /b 1
-)
-call :LOG "[INFO] 日付更新OK: %~1"
-exit /b 0
-
 
 
 :RUN
 echo [RUN] %*>> "%LOG_FILE%"
 %* >> "%LOG_FILE%" 2>&1
-set "RC=%ERRORLEVEL%"
-if not "%RC%"=="0" (
-  echo [ERROR] RC=%RC% at %*>> "%LOG_FILE%"
-  echo.
-  echo [ERROR] 失敗しました: %*
-  echo ログを開きます: %LOG_FILE%
-  start "" notepad "%LOG_FILE%"
-  echo.
-  pause
-  exit /b %RC%
-)
+if errorlevel 1 call :DIE "Command failed: %*"
 exit /b 0
+
+
+:LOG
+echo %~1
+echo %~1>> "%LOG_FILE%"
+exit /b 0
+
+
+:DIE
+echo.
+echo [ERROR] %~1
+echo [ERROR] %~1>> "%LOG_FILE%"
+echo [LOG] %LOG_FILE%
+start "" notepad "%LOG_FILE%"
+pause
+exit /b 1
+
+
+:END_FAIL
+echo.
+echo [ERROR] Setup failed.
+echo [LOG] %LOG_FILE%
+pause
+exit /b 1

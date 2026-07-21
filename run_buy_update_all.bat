@@ -28,9 +28,8 @@ set "S3_PREFIX=pokemon"
 set "CF_DIST_ID=E51XRDVR8AQAD"
 set "PUBLIC_URL=https://kaitori.climax-card.com/pokemon/default/"
 
-set "OUTPUT_DIR=C:\Users\user\OneDrive\ドキュメント\Desktop\ポケカラッシュ"
-set "MYCA_CSV_OUT=%OUTPUT_DIR%"
-set "MYCA_CSV_NAME=POKEMON_Myca_upload.csv"
+set "MYCA_CSV_OUT=%ROOT%"
+set "MYCA_CSV_NAME=pokemon_myca_upload.csv"
 set "MYCA_CSV_PATH=%MYCA_CSV_OUT%\%MYCA_CSV_NAME%"
 set "XLSM="
 
@@ -84,10 +83,19 @@ if exist "%ROOT%\scrape_toreca_lounge_psa10.py" (
   call :LOG "[WARN] Missing optional script. Skip: scrape_toreca_lounge_psa10.py"
 )
 if exist "%ROOT%\export_sheet1_to_csv.py" (
-  call :RUN "%PYTHON_EXE%" "%ROOT%\export_sheet1_to_csv.py"
+  call :RUN "%PYTHON_EXE%" "%ROOT%\export_sheet1_to_csv.py" ^
+    --file-path "%XLSM%" ^
+    --output "%MYCA_CSV_PATH%" ^
+    --sheet-name "シート1"
 ) else (
-  call :LOG "[WARN] Missing optional script. Skip: export_sheet1_to_csv.py"
+  call :DIE "Missing required script: export_sheet1_to_csv.py"
 )
+
+if not exist "%MYCA_CSV_PATH%" (
+  call :DIE "Myca CSV was not created: %MYCA_CSV_PATH%"
+)
+
+call :LOG "[OK] Myca CSV=%MYCA_CSV_PATH%"
 
 call :LOG "[3/8] Build static pages"
 set "BUILD_DONE="
